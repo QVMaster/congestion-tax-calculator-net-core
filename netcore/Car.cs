@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace congestion.calculator
 {
-    public class Car : Vehicle
+    public class Car : IVehicle
     {
-        public String GetVehicleType()
-        {
-            return "Car";
-        }
+        // Previous: used method returning string. 
+        // Issues: prone to typos, less type-safe, harder to maintain and test.
+        //public String GetVehicleType()
+        //{
+        //    return "Car";
+        //}
+
+        // Fix: use property returning enum VehicleType. 
+        // Benefits: type-safe, more readable, easier to maintain and test.
+        public VehicleType Type => VehicleType.Car;
     }
 }
