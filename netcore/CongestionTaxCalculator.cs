@@ -106,8 +106,11 @@ public class CongestionTaxCalculator
             else
             {
                 totalFee += nextFee;
+                intervalStart = date;
             }
         }
+
+        // Apply daily cap (60 SEK per day as per Gothenburg congestion tax rule)
         if (totalFee > 60) totalFee = 60;
 
         return totalFee;
@@ -120,15 +123,13 @@ public class CongestionTaxCalculator
         if (IsTollFreeVehicle(vehicle)) return 0;
 
         // Group by calendar day
-        var grouped = dates.OrderBy(d => d).GroupBy(d => d.Date);
+        var groupedByDay = dates.OrderBy(d => d).GroupBy(d => d.Date);
 
         int total = 0;
-        foreach (var group in grouped)
+        foreach (var group in groupedByDay)
         {
-            var dayDates = group.ToArray();
-            total += GetTaxForSingleDay(vehicle, dayDates);
-
-            // optional: if total grows huge and you want micro-opt, apply daily cap inside GetTaxForSingleDay
+            var singleDayDates = group.ToArray();
+            total += GetTaxForSingleDay(vehicle, singleDayDates);
         }
 
         return total;
