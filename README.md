@@ -8,8 +8,15 @@ Clone this repository to get started. Due to a number of reasons, not least priv
 
 
 
-# Current status
+### Current status
 - Core calculation logic implemented and refactored
 - Single-day and multi-pass fee calculation works according to the 60-minute "single charge" rule
 - Toll-free vehicles and holidays/weekends are correctly handled
 - Unit tests cover key scenarios
+
+### Next stages
+1. Database integration for city-specific tax parameters
+2. Support for multiple cities with different tax rules
+3. Dependency injection for configuration parameters like daily cap
+
+This staged approach ensures that each part of the system is functional, testable, and ready for future enhancements.
