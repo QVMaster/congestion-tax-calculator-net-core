@@ -1,5 +1,7 @@
 ﻿using Xunit;
-using congestion.calculator;
+using congestion.calculator.Domain.Enumerations;
+using congestion.calculator.Domain.Services;
+using congestion.calculator.Domain.Entities;
 
 namespace congestion_tax_calculator_net_core.Tests;
 
@@ -129,9 +131,8 @@ public class CongestionTaxTests
     }
 }
 
-internal class MockVehicle : IVehicle
-{
-    private readonly VehicleType _type;
-    public MockVehicle(VehicleType type) => _type = type;
-    public VehicleType Type => _type;
+internal class MockVehicle : Vehicle
+{    
+    public MockVehicle(VehicleType type) => VehicleType = type;
+//    public VehicleType Type => VehicleType;
 }
